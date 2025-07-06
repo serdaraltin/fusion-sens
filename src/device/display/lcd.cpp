@@ -1,6 +1,7 @@
 #include "device/display/lcd.h"
 #include "config/config.h"
 #include "logger/serial_logger.h"
+#include "Adafruit_SSD1306.h"
 #include <SPI.h>
 
 

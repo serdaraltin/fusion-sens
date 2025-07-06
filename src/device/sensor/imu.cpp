@@ -7,6 +7,7 @@
 #include "config/config.h"
 #include "comms/i2c.h"
 #include "helper/hex.h"
+#include "Adafruit_MPU6050.h"
 
 Adafruit_MPU6050 sensor;
 
