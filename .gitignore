@@ -5,3 +5,7 @@
 .change_counter
 tree
 test/report
+/res/make_splash/LCDAssistant.exe
+/res/make_splash/LCDAssistantCMD/LCDAssistant.ini
+/res/make_splash/LCDAssistantCMD/LCDAssistantCMD.exe
+/res/make_splash/logo.jpg
