@@ -6,8 +6,6 @@
 #include "config/config.h"
 #include <sstream>
 #include <cstdarg>
-#include <cstring>
-#include <device/display/lcd.h>
 
 Logger *Logger::instance = nullptr;
 //Logger::LogLevel *Log;
@@ -48,13 +46,9 @@ std::string Logger::getLevelString(Logger::Level level) {
 }
 
 std::string Logger::log2String(Logger::Level level, const std::string &message) {
-    std::stringstream output, screen;
+    std::stringstream output;
     if(level > level_)
         return output.str();
-
-    screen << "[" << getLevelString(level) << "] "  << std::endl << message;
-    ILcd->text(screen.str().c_str());
-
     output << "[" << APP_NAME << "] [" << getLevelString(level) << "] " << message;
     return output.str();
 }
@@ -108,6 +102,5 @@ void Logger::LogLevel::Info(const char *message, ...) {
     va_end(args);
 
     logger_->log2String(Level::Info, formattedMessage);
-
 }
 
