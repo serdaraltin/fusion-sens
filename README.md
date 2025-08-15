@@ -181,8 +181,8 @@ The `Logger` class logs messages at different levels of severity. The `SerialLog
 #### Example Usage:
 
 ```cpp
-SerialLog.Info("Device initialized.");
-SerialLog.Debug("I2C device communication successful.");
+ISerialLog.Info("Device initialized.");
+ISerialLog.Debug("I2C device communication successful.");
 ```
 
 ### Adding a New Device

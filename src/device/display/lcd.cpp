@@ -1,12 +1,10 @@
 #include "device/display/lcd.h"
 #include "config/config.h"
+#include "config/bitmap.h"
 #include "logger/serial_logger.h"
-#include "Adafruit_SSD1306.h"
-#include <Adafruit_GFX.h>
-#include <device/display/ssd1306.h>
 
-#define motion_width  128
-#define motion_height 64
+#include <esp32-hal.h>
+#include <device/display/ssd1306.h>
 
 Lcd *Lcd::instance = nullptr;
 
@@ -17,19 +15,43 @@ Lcd *Lcd::getInstance() {
 }
 
 Lcd::Lcd() {
-    SerialLog.Info("LCD initializing...");
+    ISerialLog.Info("LCD initializing...");
 
-    if(SSD1306::getInstance() == nullptr)
+    while(!ISsd1306)
     {
-        SerialLog.Error("LCD initialization failed");
+        ISerialLog.Error("LCD initialization failed!");
+        delay(1000);
     }
-    SerialLog.Info("LCD initialized");
+    ISerialLog.Info("LCD initialized");
 
-
-
+    if(BOOT_LOGO)
+    {
+        image(LOGO);
+    }
 }
 
+void Lcd::text(const char* text)
+{
 
-void Lcd::imuData() {
+    ISsd1306->writeText(text, 1, 1);
+}
 
+void Lcd::textM(const char* text)
+{
+    ISsd1306->writeText(text, 2, 1);
+}
+
+void Lcd::image(unsigned char bitmap[])
+{
+    ISsd1306->drawImage(0,0,bitmap, 1);
+}
+
+void Lcd::image(unsigned char bitmap[], const int color)
+{
+    ISsd1306->drawImage(0,0,bitmap, color);
+}
+
+void Lcd::image(const int startX, const int startY, unsigned char bitmap[], const int color)
+{
+    ISsd1306->drawImage(startX,startY,bitmap, color);
 }

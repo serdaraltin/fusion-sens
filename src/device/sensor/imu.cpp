@@ -20,19 +20,19 @@ IMU *IMU::getInstance() {
 }
 
 IMU::IMU() {
-    SerialLog.Info("%s testing...", SENSOR_NAME);
+    ISerialLog.Info("%s testing...", SENSOR_NAME);
 
     int check = I2CI->checkDevice(SENSOR_I2C);
-    SerialLog.Info("I2C Device checked. Device=%s Result=%s",
+    ISerialLog.Info("I2C Device checked. Device=%s Result=%s",
                    HexI->int2Hex(SENSOR_I2C).c_str(), (check == 0) ? "Available" : "Not Found!" );
 
     if(!sensor.begin()){
-        SerialLog.Warning("%s not found !", SENSOR_NAME);
+        ISerialLog.Warning("%s not found !", SENSOR_NAME);
         while(FIND_REPEAT){
             delay(10);
         }
     }
-    SerialLog.Info("%s found.", SENSOR_NAME);
+    ISerialLog.Info("%s found.", SENSOR_NAME);
 
     sensor.setHighPassFilter(MPU6050_HIGHPASS_0_63_HZ);
     sensor.setMotionDetectionThreshold(1);
@@ -40,6 +40,6 @@ IMU::IMU() {
     sensor.setInterruptPinLatch(true);
     sensor.setMotionInterrupt(true);
 
-    SerialLog.Info("%s initialized.", SENSOR_NAME);
+    ISerialLog.Info("%s initialized.", SENSOR_NAME);
 }
 

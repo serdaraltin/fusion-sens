@@ -5,24 +5,19 @@
 #ifndef FUSION_SENS_SSD1306_H
 #define FUSION_SENS_SSD1306_H
 
+#define ISsd1306 SSD1306::getInstance()
 
 class SSD1306 {
 private:
     static SSD1306 *instance;
-    static void textInit();
-    static void textWrite(const char *text, int size);
 public:
     SSD1306();
     ~SSD1306() = default;
     static SSD1306 *getInstance();
 
+    static void writeText(const char *text, int size, int color);
 
-    static void text(const char *text);
-    static void textM(const char *text);
-
-    static void image(unsigned char bitmap[]);
-    static void image(unsigned char bitmap[], int color);
-    static void image(int startX, int startY, unsigned char bitmap[], int color);
+    static void drawImage(int startX, int startY, unsigned char bitmap[], int color);
 };
 
 

@@ -7,7 +7,7 @@
 #include <sstream>
 #include <cstdarg>
 #include <cstring>
-#include <device/display/ssd1306.h>
+#include <device/display/lcd.h>
 
 Logger *Logger::instance = nullptr;
 //Logger::LogLevel *Log;
@@ -51,11 +51,11 @@ std::string Logger::log2String(Logger::Level level, const std::string &message) 
     std::stringstream output, screen;
     if(level > level_)
         return output.str();
+
     screen << "[" << getLevelString(level) << "] "  << std::endl << message;
-    SSD1306::textM(screen.str().c_str());
+    ILcd->text(screen.str().c_str());
 
     output << "[" << APP_NAME << "] [" << getLevelString(level) << "] " << message;
-
     return output.str();
 }
 
