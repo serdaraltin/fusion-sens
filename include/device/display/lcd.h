@@ -1,4 +1,5 @@
-#include "config/config.h"
+#ifndef FUSION_SENS_LCD_H
+#define FUSION_SENS_LCD_H
 
 #define LcdI Lcd::getInstance()
 
@@ -13,6 +14,8 @@ public:
 
     static Lcd *getInstance();
 
-    void imuData();
+    static void imuData();
+
 };
 
+#endif //FUSION_SENS_LCD_H

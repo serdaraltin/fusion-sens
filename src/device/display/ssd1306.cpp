@@ -3,3 +3,76 @@
 //
 
 #include "device/display/ssd1306.h"
+#include "config/config.h"
+#include "logger/serial_logger.h"
+#include "config/bitmap.h"
+
+#include <Adafruit_GFX.h>
+#include "Adafruit_SSD1306.h"
+
+
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+
+SSD1306 *SSD1306::instance = nullptr;
+
+SSD1306* SSD1306::getInstance()
+{
+ if (instance == nullptr)
+     instance = new SSD1306();
+    return instance;
+}
+
+SSD1306::SSD1306()
+{
+    while (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_I2C)) {
+        SerialLog.Warning("SSD1306 allocation failed!");
+        delay(2000);
+    }
+    SerialLog.Info("SSD1306 allocation successful.");
+
+    if(BOOT_LOGO){
+        display.clearDisplay();
+        display.display();
+        drawBitmap(LOGO);
+        SerialLog.Info("SSD1306 display initialized.");
+    }
+}
+
+void SSD1306::drawBitmap(unsigned char bitmap[])
+{
+    display.clearDisplay();
+
+    display.drawBitmap(0,0,
+        bitmap,
+        SCREEN_WIDTH, SCREEN_HEIGHT,
+        1);
+
+    display.display();
+    delay(1000);
+}
+
+void SSD1306::drawBitmap(unsigned char bitmap[], int color)
+{
+    display.clearDisplay();
+
+    display.drawBitmap(0,0,
+        bitmap,
+        SCREEN_WIDTH, SCREEN_HEIGHT,
+        color);
+
+    display.display();
+    delay(1000);
+}
+void SSD1306::drawBitmap(const int startX, const int startY, unsigned char bitmap[], int color)
+{
+    display.clearDisplay();
+
+    display.drawBitmap(static_cast<__int16_t>(startX), static_cast<__int16_t>(startY),
+        bitmap,
+        SCREEN_WIDTH, SCREEN_HEIGHT,
+        color);
+
+    display.display();
+    delay(1000);
+}
+

@@ -6,8 +6,17 @@
 #define FUSION_SENS_SSD1306_H
 
 
-class ssd1306 {
+class SSD1306 {
+private:
+    static SSD1306 *instance;
 
+public:
+    SSD1306();
+    ~SSD1306() = default;
+    static SSD1306 *getInstance();
+    static void drawBitmap(unsigned char bitmap[]);
+    static void drawBitmap(unsigned char bitmap[], int color);
+    static void drawBitmap(int startX, int startY, unsigned char bitmap[], int color);
 };
 
 

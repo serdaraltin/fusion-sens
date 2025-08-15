@@ -2,10 +2,11 @@
 #include "config/config.h"
 #include "logger/serial_logger.h"
 #include "Adafruit_SSD1306.h"
-#include <SPI.h>
+#include <Adafruit_GFX.h>
+#include <device/display/ssd1306.h>
 
-
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+#define motion_width  128
+#define motion_height 64
 
 Lcd *Lcd::instance = nullptr;
 
@@ -16,25 +17,16 @@ Lcd *Lcd::getInstance() {
 }
 
 Lcd::Lcd() {
-    SerialLog.Info("SSD1306 initializing...");
-    while (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_I2C)) {
-        SerialLog.Warning("SSD1306 allocation failed!");
-        delay(2000);
+    SerialLog.Info("LCD initializing...");
+    auto screen = SSD1306::getInstance();
+    if(screen == nullptr)
+    {
+        SerialLog.Error("LCD initialization failed");
     }
-    SerialLog.Info("SSD1306 allocation successful.");
+    SerialLog.Info("LCD initialized");
 
-    if(BOOT_LOGO){
-        display.clearDisplay();
-        display.display();
-    }
 }
 
 void Lcd::imuData() {
-    display.clearDisplay();
-    display.setTextSize(2);
-    display.setTextColor(SSD1306_WHITE);
-    display.setCursor(10, 0);
 
-    display.println(F("Test"));
-    display.display();
 }
