@@ -8,6 +8,7 @@
 #include "device/display/lcd.h"
 #include "device/sensor/imu.h"
 #include <Arduino.h>
+#include <device/display/ssd1306.h>
 
 #include "comms/i2c.h"
 #include "helper/hex.h"
@@ -15,6 +16,7 @@
 
 void initialize(){
     Serial.begin(BOUD_RATE);
+    SSD1306::getInstance();
     Hex::getInstance();
     SerialLogger::getInstance();
     DeviceManager::getInstance();

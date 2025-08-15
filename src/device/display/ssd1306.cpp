@@ -17,13 +17,14 @@ SSD1306 *SSD1306::instance = nullptr;
 
 SSD1306* SSD1306::getInstance()
 {
- if (instance == nullptr)
-     instance = new SSD1306();
-    return instance;
+     if (instance == nullptr)
+         instance = new SSD1306();
+        return instance;
 }
 
 SSD1306::SSD1306()
 {
+
     while (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_I2C)) {
         SerialLog.Warning("SSD1306 allocation failed!");
         delay(2000);
@@ -33,12 +34,39 @@ SSD1306::SSD1306()
     if(BOOT_LOGO){
         display.clearDisplay();
         display.display();
-        drawBitmap(LOGO);
+        image(LOGO);
         SerialLog.Info("SSD1306 display initialized.");
     }
 }
 
-void SSD1306::drawBitmap(unsigned char bitmap[])
+void SSD1306::textInit()
+{
+    display.clearDisplay();
+    display.setTextColor(SSD1306_WHITE);
+    display.setCursor(0, 0);
+    display.cp437(true);
+}
+
+void SSD1306::textWrite(const char* text, int size)
+{
+    textInit();
+    display.setTextSize(1);
+
+    display.write(text);
+    display.display();
+}
+
+void SSD1306::text(const char* text)
+{
+    textWrite(text, 1);
+}
+
+void SSD1306::textM(const char* text)
+{
+    textWrite(text, 2);
+}
+
+void SSD1306::image(unsigned char bitmap[])
 {
     display.clearDisplay();
 
@@ -50,8 +78,7 @@ void SSD1306::drawBitmap(unsigned char bitmap[])
     display.display();
     delay(1000);
 }
-
-void SSD1306::drawBitmap(unsigned char bitmap[], int color)
+void SSD1306::image(unsigned char bitmap[], int color)
 {
     display.clearDisplay();
 
@@ -63,7 +90,7 @@ void SSD1306::drawBitmap(unsigned char bitmap[], int color)
     display.display();
     delay(1000);
 }
-void SSD1306::drawBitmap(const int startX, const int startY, unsigned char bitmap[], int color)
+void SSD1306::image(const int startX, const int startY, unsigned char bitmap[], int color)
 {
     display.clearDisplay();
 

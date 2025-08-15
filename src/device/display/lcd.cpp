@@ -18,14 +18,17 @@ Lcd *Lcd::getInstance() {
 
 Lcd::Lcd() {
     SerialLog.Info("LCD initializing...");
-    auto screen = SSD1306::getInstance();
-    if(screen == nullptr)
+
+    if(SSD1306::getInstance() == nullptr)
     {
         SerialLog.Error("LCD initialization failed");
     }
     SerialLog.Info("LCD initialized");
 
+
+
 }
+
 
 void Lcd::imuData() {
 
