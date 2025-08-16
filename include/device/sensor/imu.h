@@ -6,15 +6,22 @@
 #define FUSION_SENS_IMU_H
 
 
-#define IMUI IMU::getInstance()
+#define IIMU IMU::getInstance()
+
+#include "Adafruit_MPU6050.h"
 
 class IMU {
 private:
     static IMU *instance;
 public:
-    static IMU *getInstance();
-
     IMU();
+    static IMU &getInstance()
+    {
+        static IMU instance;
+        return instance;
+    }
+    Adafruit_MPU6050 sensor;
+
 };
 
 

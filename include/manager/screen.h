@@ -16,6 +16,8 @@ public:
     SCREEN();
 
     ~SCREEN() = default;
+
+
     static SCREEN &getInstance()
     {
         static SCREEN instance;
@@ -25,8 +27,8 @@ public:
 
     static void log(const std::string& level, const std::string& message);
 
-    static void text(const char *text);
-    static void textM(const char *text);
+    static void text(const std::string& text);
+    static void textM(const std::string& text);
 
     static void image(unsigned char bitmap[]);
     static void image(unsigned char bitmap[], int color);

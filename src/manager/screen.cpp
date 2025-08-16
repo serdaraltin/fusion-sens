@@ -68,14 +68,14 @@ void SCREEN::log(const std::string &level, const std::string& message)
     ISSD1306.writeText(logGetAll().c_str(), 1, 1);
 }
 
-void SCREEN::text(const char* text)
+void SCREEN::text(const std::string& text)
 {
-    ISSD1306.writeText(text, 1, 1);
+    ISSD1306.writeText(text.c_str(), 1, 1);
 }
 
-void SCREEN::textM(const char* text)
+void SCREEN::textM(const std::string& text)
 {
-    ISSD1306.writeText(text, 2, 1);
+    ISSD1306.writeText(text.c_str(), 2, 1);
 }
 
 void SCREEN::image(unsigned char bitmap[])
@@ -83,10 +83,12 @@ void SCREEN::image(unsigned char bitmap[])
     ISSD1306.drawBitmap(bitmap);
 }
 
-void SCREEN::image(unsigned char bitmap[], int color)
+void SCREEN::image(unsigned char bitmap[], const int color)
 {
+    ISSD1306.drawBitmap(bitmap, color);
 }
 
-void SCREEN::image(int startX, int startY, unsigned char bitmap[], int color)
+void SCREEN::image(const int startX, const int startY, unsigned char bitmap[], const int color)
 {
+    ISSD1306.drawBitmap(startX, startY, bitmap, color);
 }

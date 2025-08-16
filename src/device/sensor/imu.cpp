@@ -7,22 +7,16 @@
 #include "config/config.h"
 #include "comms/i2c.h"
 #include "helper/hex.h"
-#include "Adafruit_MPU6050.h"
+#include <Adafruit_MPU6050.h>
+#include <Adafruit_BMP085.h>
 
-Adafruit_MPU6050 sensor;
 
 IMU *IMU::instance = nullptr;
 
-IMU *IMU::getInstance() {
-    if(instance == nullptr)
-        instance = new IMU();
-    return instance;
-}
-
-IMU::IMU() {
+[[noreturn]] IMU::IMU() {
     SerialLog.Info("%s testing...", SENSOR_NAME);
 
-    int check = I2CI->checkDevice(SENSOR_I2C);
+    const int check = I2CI->checkDevice(SENSOR_I2C);
     SerialLog.Info("I2C Device checked. Device=%s Result=%s",
                    HexI->int2Hex(SENSOR_I2C).c_str(), (check == 0) ? "Available" : "Not Found!" );
 
