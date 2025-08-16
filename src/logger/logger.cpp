@@ -3,7 +3,7 @@
 //
 
 #include "logger/logger.h"
-#include "config/config.h"
+#include "config.h"
 #include <sstream>
 #include <cstdarg>
 #include <manager/screen.h>
@@ -58,7 +58,7 @@ std::string Logger::LogLevel::argsFormat(const char *message, va_list args) {
 void Logger::LogLevel::None(const char *message, ...) {
     va_list args;
     va_start(args, message);
-    std::string formattedMessage = argsFormat(message, args);
+    const std::string formattedMessage = argsFormat(message, args);
     va_end(args);
 
     logger_->log2String(Level::None, formattedMessage);
@@ -67,7 +67,7 @@ void Logger::LogLevel::None(const char *message, ...) {
 void Logger::LogLevel::Error(const char *message, ...) {
     va_list args;
     va_start(args, message);
-    std::string formattedMessage = argsFormat(message, args);
+    const std::string formattedMessage = argsFormat(message, args);
     va_end(args);
 
     logger_->log2String(Level::Error, formattedMessage);
@@ -76,7 +76,7 @@ void Logger::LogLevel::Error(const char *message, ...) {
 void Logger::LogLevel::Warning(const char *message, ...) {
     va_list args;
     va_start(args, message);
-    std::string formattedMessage = argsFormat(message, args);
+    const std::string formattedMessage = argsFormat(message, args);
     va_end(args);
 
     logger_->log2String(Level::Warning, formattedMessage);
@@ -85,7 +85,7 @@ void Logger::LogLevel::Warning(const char *message, ...) {
 void Logger::LogLevel::Debug(const char *message, ...) {
     va_list args;
     va_start(args, message);
-    std::string formattedMessage = argsFormat(message, args);
+    const std::string formattedMessage = argsFormat(message, args);
     va_end(args);
 
     logger_->log2String(Level::Debug, formattedMessage);
@@ -94,7 +94,7 @@ void Logger::LogLevel::Debug(const char *message, ...) {
 void Logger::LogLevel::Info(const char *message, ...) {
     va_list args;
     va_start(args, message);
-    std::string formattedMessage = argsFormat(message, args);
+    const std::string formattedMessage = argsFormat(message, args);
     va_end(args);
 
     logger_->log2String(Level::Info, formattedMessage);

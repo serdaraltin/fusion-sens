@@ -66,12 +66,7 @@
  */
 #define SCL_PIN 22
 
-// WIFI Configuration ============================================
 
-#define WIFI_SSID "Ergo Proxy"
-#define WIFI_PASSWORD "Mayer-Re-l"
-#define WIFI_IP "10.10.10.50"
-#define WIFI_DNS "8.8.8.8"
 
 
 // SCREEN Configuration ============================================

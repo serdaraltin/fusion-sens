@@ -3,7 +3,7 @@
 //
 
 #include "logger/serial_logger.h"
-#include "config/config.h"
+#include "config.h"
 #include <string>
 #include <Arduino.h>
 
@@ -20,7 +20,7 @@ SerialLogger::SerialLogger() {
     Logger::Log.Info("Serial Logger initialized.");
 }
 
-std::string SerialLogger::log2String(Logger::Level level, const std::string &message) {
+std::string SerialLogger::log2String(const Logger::Level level, const std::string &message) {
     std::string output = Logger::log2String(level, message);
     Serial.println(output.c_str());
     return output;

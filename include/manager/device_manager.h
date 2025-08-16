@@ -6,7 +6,7 @@
 #define FUSION_SENS_DEVICE_MANAGER_H
 
 #include "device/device.h"
-#include "config/device_list.h"
+#include "device_list.h"
 #include <vector>
 
 /**

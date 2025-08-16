@@ -9,6 +9,7 @@
 #include <vector>
 #include <optional>
 
+#define IWiFi WiFiManager::getInstance()
 
 struct WiFiInfo {
     std::string ssid;       ///< SSID of the network
@@ -31,20 +32,21 @@ public:
 
     ~WiFiManager();
 
-    static WiFiManager *getInstance();
+    static WiFiManager &getInstance()
+    {
+        static WiFiManager instance;
+        return instance;
+    }
 
-    void init();
+    static std::vector<WiFiInfo> scanNetworks();
 
-    std::vector<WiFiInfo> scanNetworks();
+    static bool connectToNetwork();
 
-    bool connectToNetwork(const std::string &ssid, const std::string &password);
+    static bool connectToNetwork(const std::string &ssid, const std::string &password);
 
-    WiFiInfo getCurrentNetworkInfo() const;
+    static WiFiInfo getCurrentNetworkInfo() ;
 
-    std::string getIpAddress() const;
-
-    
-
+    static std::string getIpAddress();
 
 };
 

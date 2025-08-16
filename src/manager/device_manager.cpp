@@ -3,7 +3,7 @@
 //
 
 #include "manager/device_manager.h"
-#include "config/device_list.h"
+#include "device_list.h"
 #include "helper/hex.h"
 #include <algorithm>
 

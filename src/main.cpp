@@ -1,4 +1,4 @@
-#include "config/config.h"
+#include "config.h"
 #include "manager/screen.h"
 #include "device/sensor/imu.h"
 #include "comms/i2c.h"
@@ -8,7 +8,10 @@
 #include <Arduino.h>
 #include <iomanip>
 #include <sstream>
+#include <comms/wifi_manager.h>
 #include <device/sensor/bmp180.h>
+
+#include "WiFi.h"
 
 void initialize()
 {
@@ -25,24 +28,25 @@ void initialize()
 
     //Manager
     SCREEN::getInstance();
-
+    WiFiManager::getInstance();
 }
 
 void test(){
-    Serial.begin(BOUD_RATE);
+
 }
 
 #ifndef  UNIT_TEST
 void setup() {
 
     initialize();
+    IWiFi.connectToNetwork();
 
 
-
-
+    delay(1000);
     test();
 }
-std::string formatFloat(float value, int width = 6) {
+
+std::string formatFloat(const float value, const int width = 6) {
     std::stringstream ss;
     ss << std::fixed << std::setprecision(2) << std::setw(width) << value;
     return ss.str();
@@ -70,7 +74,7 @@ void loop() {
     ISCREEN.text(ss.str());
 
 
-    delay(50);
+    delay(100);
 }
 
 #endif

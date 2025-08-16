@@ -1,5 +1,5 @@
-#include "config/config.h"
-#include "config/bitmap.h"
+#include "config.h"
+#include "bitmap.h"
 #include "manager/screen.h"
 #include "device/display/ssd1306.h"
 

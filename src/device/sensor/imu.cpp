@@ -4,7 +4,7 @@
 
 #include "device/sensor/imu.h"
 #include "logger/serial_logger.h"
-#include "config/config.h"
+#include "config.h"
 #include "comms/i2c.h"
 #include "helper/hex.h"
 #include <Adafruit_MPU6050.h>

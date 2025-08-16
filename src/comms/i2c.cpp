@@ -4,7 +4,7 @@
 
 
 #include "comms/i2c.h"
-#include "config/config.h"
+#include "config.h"
 #include "logger/serial_logger.h"
 
 #include <SPI.h>
