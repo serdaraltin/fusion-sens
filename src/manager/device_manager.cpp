@@ -2,11 +2,9 @@
 // Created by Serdar on 6.11.2024.
 //
 
-#include "device/device_manager.h"
+#include "manager/device_manager.h"
 #include "config/device_list.h"
-#include "logger/serial_logger.h"
-#include "helper//hex.h"
-#include <iostream>
+#include "helper/hex.h"
 #include <algorithm>
 
 DeviceManager *DeviceManager::instance = nullptr;
@@ -16,7 +14,6 @@ DeviceManager *DeviceManager::getInstance() {
         instance = new DeviceManager();
     return instance;
 }
-
 
 DeviceManager::DeviceManager() {
     deviceList = sDeviceList;

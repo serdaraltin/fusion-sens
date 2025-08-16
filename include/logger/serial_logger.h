@@ -7,7 +7,7 @@
 
 #include "logger.h"
 
-#define SerialLog SerialLogger::getInstance()->Log
+#define SerialLog SerialLogger::getInstance().Log
 
 /**
  * @file serial_logger.h
@@ -63,7 +63,11 @@ public:
      *
      * This method ensures that only one instance of SerialLogger exists in the application.
      */
-    static SerialLogger *getInstance();
+    static SerialLogger &getInstance()
+    {
+     static SerialLogger instance;
+     return instance;
+    }
 
     /**
      * @brief Converts the log message to a string for serial output.

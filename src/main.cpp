@@ -1,23 +1,27 @@
-#include <SPI.h>
-#include <Wire.h>
-
 #include "config/config.h"
-#include "logger/serial_logger.h"
-
-#include "device/device_manager.h"
-#include "device/display/lcd.h"
+#include "manager/screen.h"
 #include "device/sensor/imu.h"
+#include "comms/i2c.h"
+
 #include <Arduino.h>
 #include <device/display/ssd1306.h>
+#include <logger/serial_logger.h>
 
-#include "comms/i2c.h"
-#include "helper/hex.h"
-
-void initialize(){
+void initialize()
+{
     Serial.begin(BOUD_RATE);
-    DeviceManager::getInstance();
+
+    //Communication
+    SerialLogger::getInstance();
     I2C::getInstance();
-    Lcd::getInstance();
+
+    //Device
+    SSD1306::getInstance();
+    IMU::getInstance();
+
+    //Manager
+    SCREEN::getInstance();
+
 }
 
 void test(){
@@ -26,13 +30,14 @@ void test(){
 
 #ifndef  UNIT_TEST
 void setup() {
-    initialize();
-    test();
 
+    initialize();
+
+    test();
 }
 
 void loop() {
-
     delay(5000);
 }
+
 #endif

@@ -10,11 +10,6 @@
 
 SerialLogger *SerialLogger::instance = nullptr;
 
-SerialLogger *SerialLogger::getInstance() {
-    if(instance == nullptr)
-        instance = new SerialLogger();
-    return instance;
-}
 
 SerialLogger::SerialLogger() {
     setLevel(LOG_LEVEL);

@@ -13,7 +13,7 @@
 
 #include <gtest/gtest.h>
 #include "device/device.h"
-#include "device/device_manager.h"
+#include "manager/device_manager.h"
 
 /**
  * @class DeviceManagerTest

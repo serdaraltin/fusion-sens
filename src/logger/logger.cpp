@@ -6,23 +6,13 @@
 #include "config/config.h"
 #include <sstream>
 #include <cstdarg>
-#include <device/display/lcd.h>
-#include <device/display/ssd1306.h>
-
+#include <manager/screen.h>
 
 Logger *Logger::instance = nullptr;
 //Logger::LogLevel *Log;
 
 Logger::Logger() {
     level_ = getDefaultLevel();
-}
-
-Logger *Logger::getInstance() {
-    if(instance == nullptr) {
-        instance = new Logger();
-        // Log = Logger::LogLevel(instance);
-    }
-    return instance;
 }
 
 void Logger::setLevel(Logger::Level level) {
@@ -52,6 +42,9 @@ std::string Logger::log2String(Logger::Level level, const std::string &message) 
     std::stringstream output;
     if(level > level_)
         return output.str();
+
+    ISCREEN.log(getLevelString(level), message);
+
     output << "[" << APP_NAME << "] [" << getLevelString(level) << "] " << message;
     return output.str();
 }

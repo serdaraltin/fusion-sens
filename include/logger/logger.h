@@ -66,7 +66,11 @@ public:
      *
      * This method ensures that only one instance of Logger exists in the application.
      */
-    static Logger *getInstance();
+    static Logger &getInstance()
+    {
+      static Logger instance;
+      return instance;
+    }
 
     /**
      * @brief Sets the logging level.

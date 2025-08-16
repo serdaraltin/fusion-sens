@@ -10,7 +10,7 @@
  * @brief Configuration file for the Fusion Sens project.
  *
  * This file contains all the necessary configuration settings for the Fusion Sens application.
- * It includes settings for serial communication, I2C configuration, LCD setup, and sensor initialization.
+ * It includes settings for serial communication, I2C configuration, SCREEN setup, and sensor initialization.
  * These settings can be customized according to the hardware and requirements of the project.
  */
 
@@ -74,13 +74,13 @@
 #define WIFI_DNS "8.8.8.8"
 
 
-// LCD Configuration ============================================
+// SCREEN Configuration ============================================
 
 /**
  * @def SCREEN_I2C
- * @brief The I2C address of the LCD screen.
+ * @brief The I2C address of the SCREEN screen.
  *
- * This defines the I2C address for the LCD screen, set to 0x3C.
+ * This defines the I2C address for the SCREEN screen, set to 0x3C.
  */
 #define SCREEN_I2C 0x3C
 
@@ -94,7 +94,7 @@
 
 /**
  * @def SCREEN_WIDTH
- * @brief The width of the LCD screen.
+ * @brief The width of the SCREEN screen.
  *
  * This defines the width of the OLED screen in pixels, set to 128.
  */
@@ -102,7 +102,7 @@
 
 /**
  * @def SCREEN_HEIGHT
- * @brief The height of the LCD screen.
+ * @brief The height of the SCREEN screen.
  *
  * This defines the height of the OLED screen in pixels, set to 64.
  */
