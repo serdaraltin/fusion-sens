@@ -5,22 +5,9 @@
 #ifndef FUSION_SENS_SSD1306_H
 #define FUSION_SENS_SSD1306_H
 
-#define ISSD1306 SSD1306::getInstance()
 
-class SSD1306 {
-private:
-    static SSD1306 *instance;
+class ssd1306 {
 
-public:
-    SSD1306();
-    ~SSD1306() = default;
-    static SSD1306 *getInstance();
-
-    static void writeText(const char *text, int size, int color);
-
-    static void drawBitmap(unsigned char bitmap[]);
-    static void drawBitmap(unsigned char bitmap[], int color);
-    static void drawBitmap(int startX, int startY, unsigned char bitmap[], int color);
 };
 
 

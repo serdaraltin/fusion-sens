@@ -1,9 +1,11 @@
-#include "config/config.h"
-#include "config/bitmap.h"
 #include "device/display/lcd.h"
+#include "config/config.h"
 #include "logger/serial_logger.h"
-#include <Adafruit_GFX.h>
-#include <device/display/ssd1306.h>
+#include "Adafruit_SSD1306.h"
+#include <SPI.h>
+
+
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 Lcd *Lcd::instance = nullptr;
 
@@ -14,34 +16,25 @@ Lcd *Lcd::getInstance() {
 }
 
 Lcd::Lcd() {
-    SerialLog.Info("LCD initializing...");
-    //fill
-    SerialLog.Info("LCD initialized");
+    SerialLog.Info("SSD1306 initializing...");
+    while (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_I2C)) {
+        SerialLog.Warning("SSD1306 allocation failed!");
+        delay(2000);
+    }
+    SerialLog.Info("SSD1306 allocation successful.");
 
     if(BOOT_LOGO){
-        image(LOGO);
+        display.clearDisplay();
+        display.display();
     }
 }
 
-void Lcd::text(const char* text)
-{
-    ISSD1306->writeText(text, 1, 1);
-}
+void Lcd::imuData() {
+    display.clearDisplay();
+    display.setTextSize(2);
+    display.setTextColor(SSD1306_WHITE);
+    display.setCursor(10, 0);
 
-void Lcd::textM(const char* text)
-{
-    ISSD1306->writeText(text, 1, 1);
-}
-
-void Lcd::image(unsigned char bitmap[])
-{
-    ISSD1306->drawBitmap(bitmap);
-}
-
-void Lcd::image(unsigned char bitmap[], int color)
-{
-}
-
-void Lcd::image(int startX, int startY, unsigned char bitmap[], int color)
-{
+    display.println(F("Test"));
+    display.display();
 }

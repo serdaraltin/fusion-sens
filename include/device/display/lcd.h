@@ -1,7 +1,6 @@
-#ifndef FUSION_SENS_LCD_H
-#define FUSION_SENS_LCD_H
+#include "config/config.h"
 
-#define ILcd Lcd::getInstance()
+#define LcdI Lcd::getInstance()
 
 class Lcd{
 private:
@@ -14,13 +13,6 @@ public:
 
     static Lcd *getInstance();
 
-
-    static void text(const char *text);
-    static void textM(const char *text);
-
-    static void image(unsigned char bitmap[]);
-    static void image(unsigned char bitmap[], int color);
-    static void image(int startX, int startY, unsigned char bitmap[], int color);
+    void imuData();
 };
 
-#endif //FUSION_SENS_LCD_H
