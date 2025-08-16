@@ -6,6 +6,9 @@
 #include "config/config.h"
 #include <sstream>
 #include <cstdarg>
+#include <device/display/lcd.h>
+#include <device/display/ssd1306.h>
+
 
 Logger *Logger::instance = nullptr;
 //Logger::LogLevel *Log;

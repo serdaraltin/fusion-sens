@@ -5,7 +5,6 @@
 #include "device/display/ssd1306.h"
 #include "config/config.h"
 #include "logger/serial_logger.h"
-#include "config/bitmap.h"
 
 #include <Adafruit_GFX.h>
 #include "Adafruit_SSD1306.h"
@@ -30,12 +29,17 @@ SSD1306::SSD1306()
     }
     SerialLog.Info("SSD1306 allocation successful.");
 
-    if(BOOT_LOGO){
-        display.clearDisplay();
-        display.display();
-        drawBitmap(LOGO);
-        SerialLog.Info("SSD1306 display initialized.");
-    }
+
+}
+
+void SSD1306::writeText(const char* text, const int size, const int color)
+{
+    display.clearDisplay();
+    display.setTextColor(color);
+    display.setTextSize(size);
+    display.setCursor(0, 0);
+    display.print(text);
+    display.display();
 }
 
 void SSD1306::drawBitmap(unsigned char bitmap[])
@@ -50,7 +54,6 @@ void SSD1306::drawBitmap(unsigned char bitmap[])
     display.display();
     delay(1000);
 }
-
 void SSD1306::drawBitmap(unsigned char bitmap[], int color)
 {
     display.clearDisplay();

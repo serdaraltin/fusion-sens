@@ -7,7 +7,7 @@
 
 #include "logger.h"
 
-#define ISerialLog SerialLogger::getInstance()->Log
+#define SerialLog SerialLogger::getInstance()->Log
 
 /**
  * @file serial_logger.h

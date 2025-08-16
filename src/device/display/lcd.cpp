@@ -1,12 +1,9 @@
-#include "device/display/lcd.h"
 #include "config/config.h"
+#include "config/bitmap.h"
+#include "device/display/lcd.h"
 #include "logger/serial_logger.h"
-#include "Adafruit_SSD1306.h"
 #include <Adafruit_GFX.h>
 #include <device/display/ssd1306.h>
-
-#define motion_width  128
-#define motion_height 64
 
 Lcd *Lcd::instance = nullptr;
 
@@ -18,15 +15,33 @@ Lcd *Lcd::getInstance() {
 
 Lcd::Lcd() {
     SerialLog.Info("LCD initializing...");
-    auto screen = SSD1306::getInstance();
-    if(screen == nullptr)
-    {
-        SerialLog.Error("LCD initialization failed");
-    }
+    //fill
     SerialLog.Info("LCD initialized");
 
+    if(BOOT_LOGO){
+        image(LOGO);
+    }
 }
 
-void Lcd::imuData() {
+void Lcd::text(const char* text)
+{
+    ISSD1306->writeText(text, 1, 1);
+}
 
+void Lcd::textM(const char* text)
+{
+    ISSD1306->writeText(text, 1, 1);
+}
+
+void Lcd::image(unsigned char bitmap[])
+{
+    ISSD1306->drawBitmap(bitmap);
+}
+
+void Lcd::image(unsigned char bitmap[], int color)
+{
+}
+
+void Lcd::image(int startX, int startY, unsigned char bitmap[], int color)
+{
 }

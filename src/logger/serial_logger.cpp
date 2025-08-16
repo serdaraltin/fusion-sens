@@ -4,7 +4,6 @@
 
 #include "logger/serial_logger.h"
 #include "config/config.h"
-#include <SPI.h>
 #include <string>
 #include <Arduino.h>
 
