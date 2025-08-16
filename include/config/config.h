@@ -108,6 +108,9 @@
  */
 #define SCREEN_HEIGHT 64
 
+#define SCREEN_LINE_LIMIT 8
+#define SCREEN_CHARACTER_LIMIT 20
+
 /**
  * @def BOOT_LOGO
  * @brief Whether to display the boot logo.
