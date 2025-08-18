@@ -6,6 +6,7 @@
 #define FUSION_SENS_SSD1306_H
 
 #define ISSD1306 SSD1306::getInstance()
+#include <cstdint>
 
 class SSD1306 {
 private:
@@ -22,6 +23,7 @@ public:
 
     static void init();
 
+    static void testanimate();
     static void writeText(const char *text, int size, int color);
 
     static void drawBitmap(unsigned char bitmap[]);

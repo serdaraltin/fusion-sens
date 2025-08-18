@@ -53,6 +53,7 @@ std::string formatFloat(const float value, const int width = 6) {
 }
 
 void loop() {
+
     sensors_event_t acc, gyro, temp;
     IIMU.sensor.getEvent(&acc, &gyro, &temp);
 
