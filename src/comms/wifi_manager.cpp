@@ -18,6 +18,8 @@ WiFiManager::WiFiManager()
 }
 
 std::vector <WiFiInfo> WiFiManager::scanNetworks() {
+
+
     return std::vector<WiFiInfo>();
 }
 
