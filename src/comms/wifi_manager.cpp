@@ -8,6 +8,7 @@
 #include <logger/serial_logger.h>
 
 WiFiManager* WiFiManager::instance = nullptr;
+WiFiInfo WiFiManager::currentNetworkInfo;
 
 WiFiManager::~WiFiManager() = default;
 
@@ -18,7 +19,15 @@ WiFiManager::WiFiManager()
 }
 
 std::vector <WiFiInfo> WiFiManager::scanNetworks() {
+    WiFi.mode(WIFI_STA);
+    WiFi.disconnect();
+    delay(100);
 
+    int networks = WiFi.scanNetworks();
+    for (int i = 0; i < networks; i++)
+    {
+
+    }
 
     return std::vector<WiFiInfo>();
 }
@@ -30,26 +39,36 @@ bool WiFiManager::connectToNetwork()
 
 bool WiFiManager::connectToNetwork(const std::string &ssid, const std::string &password) {
     WiFi.begin(ssid.c_str(),password.c_str());
-    int i=WIFI_REPEAT_LIMIT;
+
+    int attempts = WIFI_REPEAT_LIMIT;
     while (WiFi.status() != WL_CONNECTED)
     {
-        if(i==0)
+        if(attempts==0)
             return false;
-        SerialLog.Info("WiFi conn...[%d]",WIFI_REPEAT_LIMIT-i);
+        SerialLog.Info("WiFi conn...[%d]",WIFI_REPEAT_LIMIT - attempts);
         delay(WIFI_REPEAT_INTERVAL);
-        i--;
+        attempts--;
     }
+
+    currentNetworkInfo.ssid = WiFi.SSID().c_str();
+    currentNetworkInfo.bssid = WiFi.BSSIDstr().c_str();
+    currentNetworkInfo.rssi = WiFi.RSSI();
+    currentNetworkInfo.channel = WiFi.channel();
+    currentNetworkInfo.ip = WiFi.macAddress().c_str();
+    currentNetworkInfo.mac = WiFi.macAddress().c_str();
+    //currentNetworkInfo->encryption = (WiFi.encryptionType() == WIFI_AUTH_OPEN) ? "Open" : "Encrypted";
+
     SerialLog.Info("WiFi connected");
     return true;
 }
 
 WiFiInfo WiFiManager::getCurrentNetworkInfo() {
-    return WiFiInfo();
+    return currentNetworkInfo;
 }
 
 std::string WiFiManager::getIpAddress()
 {
-    return std::string();
+    return currentNetworkInfo.ip;
 }
 
 

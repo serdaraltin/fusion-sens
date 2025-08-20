@@ -16,14 +16,16 @@ struct WiFiInfo {
     std::string bssid;      ///< BSSID (MAC address) of the network
     int rssi;               ///< Signal strength (RSSI)
     int channel;            ///< Channel number
+    std::string ip;
+    std::string mac;
     std::string encryption; ///< Encryption type
 };
 
 class WiFiManager{
 private:
     static WiFiManager *instance;
+    static WiFiInfo currentNetworkInfo;
 
-    WiFiInfo currentNetworkInfo;
     std::vector<WiFiInfo> scannedNetworks;
 
     WiFiManager();

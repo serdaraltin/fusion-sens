@@ -41,6 +41,7 @@ void setup() {
     initialize();
     IWiFi.connectToNetwork();
 
+    SerialLog.Info(IWiFi.getIpAddress().c_str());
 
     delay(1000);
     test();
@@ -54,7 +55,7 @@ std::string formatFloat(const float value, const int width = 6) {
 
 void loop() {
 
-    WiFi.mode(WIFI_STA);
+   /* WiFi.mode(WIFI_STA);
     WiFi.disconnect();
     delay(100);
 
@@ -104,7 +105,7 @@ void loop() {
         }
         Serial.println();
         delay(10);
-    }
+    }*/
 /*
     sensors_event_t acc, gyro, temp;
     IIMU.sensor.getEvent(&acc, &gyro, &temp);
