@@ -128,7 +128,7 @@ void loop() {
 
 */
 
-    WiFi.scanDelete();
+    //WiFi.scanDelete();
 
     // Wait a bit before scanning again.
     delay(5000);

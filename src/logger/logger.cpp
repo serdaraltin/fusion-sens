@@ -61,6 +61,7 @@ void Logger::LogLevel::None(const char *message, ...) {
     const std::string formattedMessage = argsFormat(message, args);
     va_end(args);
 
+
     logger_->log2String(Level::None, formattedMessage);
 }
 
