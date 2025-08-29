@@ -8,7 +8,7 @@
 #include <logger/serial_logger.h>
 
 WiFiManager* WiFiManager::instance = nullptr;
-WiFiInfo WiFiManager::currentNetworkInfo;
+WiFiInfo WiFiManager::currentWiFiInfo;
 
 WiFiManager::~WiFiManager() = default;
 
@@ -32,12 +32,12 @@ std::vector <WiFiInfo> WiFiManager::scanNetworks() {
     return std::vector<WiFiInfo>();
 }
 
-bool WiFiManager::connectToNetwork()
+bool WiFiManager::connectToWiFi()
 {
-    return connectToNetwork(WIFI_SSID, WIFI_PASSWORD);
+    return connectToWiFi(WIFI_SSID, WIFI_PASSWORD);
 }
 
-bool WiFiManager::connectToNetwork(const std::string &ssid, const std::string &password) {
+bool WiFiManager::connectToWiFi(const std::string &ssid, const std::string &password) {
     WiFi.begin(ssid.c_str(),password.c_str());
 
     int attempts = WIFI_REPEAT_LIMIT;
@@ -50,25 +50,25 @@ bool WiFiManager::connectToNetwork(const std::string &ssid, const std::string &p
         attempts--;
     }
 
-    currentNetworkInfo.ssid = WiFi.SSID().c_str();
-    currentNetworkInfo.bssid = WiFi.BSSIDstr().c_str();
-    currentNetworkInfo.rssi = WiFi.RSSI();
-    currentNetworkInfo.channel = WiFi.channel();
-    currentNetworkInfo.ip = WiFi.macAddress().c_str();
-    currentNetworkInfo.mac = WiFi.macAddress().c_str();
-    //currentNetworkInfo->encryption = (WiFi.encryptionType() == WIFI_AUTH_OPEN) ? "Open" : "Encrypted";
+    currentWiFiInfo.ssid = WiFi.SSID().c_str();
+    currentWiFiInfo.bssid = WiFi.BSSIDstr().c_str();
+    currentWiFiInfo.rssi = WiFi.RSSI();
+    currentWiFiInfo.channel = WiFi.channel();
+    currentWiFiInfo.ip = WiFi.macAddress().c_str();
+    currentWiFiInfo.mac = WiFi.macAddress().c_str();
+    //currentWiFiInfo->encryption = (WiFi.encryptionType() == WIFI_AUTH_OPEN) ? "Open" : "Encrypted";
 
     SerialLog.Info("WiFi connected");
     return true;
 }
 
-WiFiInfo WiFiManager::getCurrentNetworkInfo() {
-    return currentNetworkInfo;
+WiFiInfo WiFiManager::getWiFiInfo() {
+    return currentWiFiInfo;
 }
 
 std::string WiFiManager::getIpAddress()
 {
-    return currentNetworkInfo.ip;
+    return currentWiFiInfo.ip;
 }
 
 

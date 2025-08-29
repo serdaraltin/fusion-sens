@@ -24,7 +24,7 @@ struct WiFiInfo {
 class WiFiManager{
 private:
     static WiFiManager *instance;
-    static WiFiInfo currentNetworkInfo;
+    static WiFiInfo currentWiFiInfo;
 
     std::vector<WiFiInfo> scannedNetworks;
 
@@ -42,11 +42,11 @@ public:
 
     static std::vector<WiFiInfo> scanNetworks();
 
-    static bool connectToNetwork();
+    static bool connectToWiFi();
 
-    static bool connectToNetwork(const std::string &ssid, const std::string &password);
+    static bool connectToWiFi(const std::string &ssid, const std::string &password);
 
-    static WiFiInfo getCurrentNetworkInfo() ;
+    static WiFiInfo getWiFiInfo() ;
 
     static std::string getIpAddress();
 
