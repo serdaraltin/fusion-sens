@@ -1,7 +1,8 @@
 #include "config.h"
-#include "bitmap.h"
 #include "manager/screen.h"
 #include "device/display/ssd1306.h"
+#include "screen.h"
+#include "static.h"
 
 #include <Adafruit_GFX.h>
 #include <sstream>

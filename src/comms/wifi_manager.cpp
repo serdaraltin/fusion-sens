@@ -62,7 +62,6 @@ bool WiFiManager::connect(const std::string& ssid, const std::string& password)
     }
     SerialLog.Info("Wifi Connected.");
     updateWiFiInfo();
-    //SerialLog.Info(WiFi.localIP().toString().c_str());
     return true;
 }
 
@@ -85,5 +84,12 @@ void WiFiManager::updateWiFiInfo()
     currentWiFi.rssi = WiFi.RSSI();
     currentWiFi.ip = WiFi.localIP().toString().c_str();
     //currentWiFi.encryption = WiFi.encryptionType;
+    SerialLog.Info("Wifi updated.");
+}
 
+bool WiFiManager::getStatus()
+{
+    if(WiFiClass::status() == WL_CONNECTED)
+        return true;
+    return false;
 }

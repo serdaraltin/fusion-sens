@@ -1,4 +1,4 @@
-#include "config.h"
+#include "comm.h"
 #include "manager/screen.h"
 #include "device/sensor/imu.h"
 #include "comms/i2c.h"
@@ -6,12 +6,10 @@
 #include "logger/serial_logger.h"
 
 #include <Arduino.h>
-#include <iomanip>
-#include <sstream>
 #include <comms/wifi_manager.h>
 #include <device/sensor/bmp180.h>
-
-#include "WiFi.h"
+#include <iomanip>
+#include <sstream>
 
 void initialize()
 {
@@ -35,7 +33,7 @@ void test(){
 
 }
 
-#ifndef  UNIT_TEST
+//#ifndef  UNIT_TEST
 void setup() {
 
     initialize();
@@ -135,4 +133,4 @@ void loop() {
     delay(5000);
 }
 
-#endif
+//#endif

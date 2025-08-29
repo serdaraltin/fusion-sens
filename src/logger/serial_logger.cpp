@@ -3,7 +3,8 @@
 //
 
 #include "logger/serial_logger.h"
-#include "config.h"
+#include "general.h"
+#include "comm.h"
 #include <string>
 #include <Arduino.h>
 

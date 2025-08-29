@@ -6,7 +6,6 @@
 #define FUSION_SENS_SSD1306_H
 
 #define ISSD1306 SSD1306::getInstance()
-#include <cstdint>
 
 class SSD1306 {
 private:

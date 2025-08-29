@@ -4,7 +4,7 @@
 
 #include "device/display/ssd1306.h"
 #include "logger/serial_logger.h"
-#include "config.h"
+#include "screen.h"
 
 #include <Adafruit_GFX.h>
 #include "Adafruit_SSD1306.h"

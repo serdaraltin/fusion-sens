@@ -3,7 +3,7 @@
 //
 
 #include "logger/logger.h"
-#include "config.h"
+#include "general.h"
 #include <sstream>
 #include <cstdarg>
 #include <manager/screen.h>
