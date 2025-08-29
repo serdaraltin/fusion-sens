@@ -39,9 +39,9 @@ void test(){
 void setup() {
 
     initialize();
-    IWiFi.connectWiFi();
+    IWiFi.connect();
 
-    SerialLog.Info(IWiFi.getWiFiInfo().ip.c_str());
+    SerialLog.Info(IWiFi.getInfo().ip.c_str());
 
     delay(1000);
     test();

@@ -19,10 +19,10 @@ struct WifiInfo
     std::string ssid;
     std::string password;
     std::string bssid;
-    int32_t rssi;
-    int32_t channel;
-    wifi_auth_mode_t encryption;
     std::string ip;
+    int channel;
+    int8_t rssi;
+    wifi_auth_mode_t encryption;
 };
 
 class WiFiManager{
@@ -32,23 +32,25 @@ private:
 
     WiFiManager();
 
+    void updateWiFiInfo();
+
 public:
 
     ~WiFiManager();
 
     static WiFiManager& getInstance();
 
-    std::vector<WifiInfo> scanNetworks();
+    static std::vector<WifiInfo> scanNetworks();
 
     bool connect();
 
     bool connect(const std::string& ssid, const std::string& password);
 
-    void disconnect();
+    static void disconnect();
 
     WifiInfo getInfo();
 
-    static wl_status_t getStatus();
+    //static wl_status_t getStatus();
 
 };
 

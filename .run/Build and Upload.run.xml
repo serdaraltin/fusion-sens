@@ -1,0 +1,17 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Build and Upload" type="ShConfigurationType" focusToolWindowBeforeRun="true">
+    <option name="SCRIPT_TEXT" value="$USER_HOME$/.platformio/penv/bin/pio run -e esp32-Build &amp;&amp; $USER_HOME$/.platformio/penv/bin/pio run -t upload -t monitor -e esp32-Build" />
+    <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+    <option name="SCRIPT_PATH" value="pio" />
+    <option name="SCRIPT_OPTIONS" value="test -e esp32-Test" />
+    <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+    <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+    <option name="INTERPRETER_PATH" value="/bin/zsh" />
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="EXECUTE_IN_TERMINAL" value="false" />
+    <option name="EXECUTE_SCRIPT_FILE" value="false" />
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>

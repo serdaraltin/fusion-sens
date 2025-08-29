@@ -6,17 +6,18 @@
 #include <thread>
 #include <WiFi.h>
 
+#include <esp_wifi_types.h>
 #include "comms/wifi_manager.h"
 #include <logger/serial_logger.h>
-#include "config_wifi.h"
+#include "wifi.h"
 
 std::unique_ptr<WiFiManager> WiFiManager::instance = nullptr;
 
 WiFiManager::~WiFiManager() = default;
 
-WiFiManager::WiFiManager()
+WiFiManager::WiFiManager(): currentWiFi()
 {
-    WiFi.mode(WIFI_STA);
+    WiFiClass::mode(WIFI_STA);
     SerialLog.Info("WifiManager initialized");
 }
 
@@ -36,7 +37,7 @@ std::vector<WifiInfo> WiFiManager::scanNetworks()
 
 bool WiFiManager::connect()
 {
-    if (WiFi.status() == WL_CONNECTED)
+    if (WiFiClass::status() == WL_CONNECTED)
         return true;
 
     return connect(WIFI_SSID, WIFI_PASSWORD);
@@ -44,14 +45,30 @@ bool WiFiManager::connect()
 
 bool WiFiManager::connect(const std::string& ssid, const std::string& password)
 {
-    if (WiFi.status() == WL_CONNECTED)
+    if (WiFiClass::status() == WL_CONNECTED)
         return true;
 
+    WiFiClass::mode(WIFI_STA);
+    WiFi.begin(ssid.c_str(), password.c_str());
+
+    int attempts = WIFI_REPEAT_LIMIT;
+
+    while(WiFiClass::status() != WL_CONNECTED)
+    {
+        if (--attempts == 0)
+            return false;
+        SerialLog.Info("Wifi conn..[%d]", WIFI_REPEAT_LIMIT - attempts);
+        delay(WIFI_REPEAT_INTERVAL);
+    }
+    SerialLog.Info("Wifi Connected.");
+    updateWiFiInfo();
+    //SerialLog.Info(WiFi.localIP().toString().c_str());
+    return true;
 }
 
 void WiFiManager::disconnect()
 {
-    if (WiFi.status() == WL_CONNECTED)
+    if (WiFiClass::status() == WL_CONNECTED)
         WiFi.disconnect();
 }
 
@@ -60,7 +77,13 @@ WifiInfo WiFiManager::getInfo()
     return currentWiFi;
 }
 
-wl_status_t WiFiManager::getStatus()
+void WiFiManager::updateWiFiInfo()
 {
-    return WiFi.status();
+    currentWiFi.ssid = WiFi.SSID().c_str();
+    currentWiFi.bssid = WiFi.macAddress().c_str();
+    currentWiFi.channel = WiFi.channel();
+    currentWiFi.rssi = WiFi.RSSI();
+    currentWiFi.ip = WiFi.localIP().toString().c_str();
+    //currentWiFi.encryption = WiFi.encryptionType;
+
 }
