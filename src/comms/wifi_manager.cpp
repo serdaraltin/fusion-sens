@@ -61,6 +61,7 @@ bool WiFiManager::connect(const std::string& ssid, const std::string& password)
         delay(WIFI_REPEAT_INTERVAL);
     }
     SerialLog.Info("Wifi Connected.");
+
     updateWiFiInfo();
     return true;
 }
@@ -78,6 +79,15 @@ WifiInfo WiFiManager::getInfo()
 
 void WiFiManager::updateWiFiInfo()
 {
+    IPAddress subnet;
+    subnet.fromString(F(WIFI_SUBNET));
+    IPAddress gateway;
+    gateway.fromString(F(WIFI_GATEWAY));
+    IPAddress local_IP;
+    local_IP.fromString(F(WIFI_IP));
+
+    WiFi.config(local_IP, gateway, subnet);
+
     currentWiFi.ssid = WiFi.SSID().c_str();
     currentWiFi.bssid = WiFi.macAddress().c_str();
     currentWiFi.channel = WiFi.channel();

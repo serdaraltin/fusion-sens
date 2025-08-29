@@ -9,7 +9,11 @@
 
 #define WIFI_SSID "Ergo-Proxy"
 #define WIFI_PASSWORD "Mayer-Re-L"
+
+#define WIFI_GATEWAY "255.255.255.0"
+#define WIFI_SUBNET "10.10.10.1"
 #define WIFI_IP "10.10.10.50"
+
 #define WIFI_DNS "8.8.8.8"
 
 #define WIFI_REPEAT_LIMIT 10
