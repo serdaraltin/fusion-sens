@@ -5,28 +5,30 @@
 #ifndef FUSION_SENS_WIFI_MANAGER_H
 #define FUSION_SENS_WIFI_MANAGER_H
 
+#include <esp_wifi_types.h>
 #include <string>
 #include <vector>
 #include <optional>
+#include <functional>
+#include <memory>
 
 #define IWiFi WiFiManager::getInstance()
 
-struct WiFiInfo {
-    std::string ssid;       ///< SSID of the network
-    std::string bssid;      ///< BSSID (MAC address) of the network
-    int rssi;               ///< Signal strength (RSSI)
-    int channel;            ///< Channel number
+struct WifiInfo
+{
+    std::string ssid;
+    std::string password;
+    std::string bssid;
+    int32_t rssi;
+    int32_t channel;
+    wifi_auth_mode_t encryption;
     std::string ip;
-    std::string mac;
-    std::string encryption; ///< Encryption type
 };
 
 class WiFiManager{
 private:
-    static WiFiManager *instance;
-    static WiFiInfo currentWiFiInfo;
-
-    std::vector<WiFiInfo> scannedNetworks;
+    static std::unique_ptr<WiFiManager> instance;
+    WifiInfo currentWiFi;
 
     WiFiManager();
 
@@ -34,21 +36,19 @@ public:
 
     ~WiFiManager();
 
-    static WiFiManager &getInstance()
-    {
-        static WiFiManager instance;
-        return instance;
-    }
+    static WiFiManager& getInstance();
 
-    static std::vector<WiFiInfo> scanNetworks();
+    std::vector<WifiInfo> scanNetworks();
 
-    static bool connectToWiFi();
+    bool connect();
 
-    static bool connectToWiFi(const std::string &ssid, const std::string &password);
+    bool connect(const std::string& ssid, const std::string& password);
 
-    static WiFiInfo getWiFiInfo() ;
+    void disconnect();
 
-    static std::string getIpAddress();
+    WifiInfo getInfo();
+
+    static wl_status_t getStatus();
 
 };
 
