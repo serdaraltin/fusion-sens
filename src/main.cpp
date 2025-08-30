@@ -4,9 +4,9 @@
 #include "comms/i2c.h"
 #include "device/display/ssd1306.h"
 #include "logger/serial_logger.h"
+#include "manager/wifi.h"
 
 #include <Arduino.h>
-#include <comms/wifi_manager.h>
 #include <device/sensor/bmp180.h>
 #include <iomanip>
 #include <sstream>

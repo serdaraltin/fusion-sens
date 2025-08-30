@@ -2,7 +2,7 @@
 // Created by Serdar on 6.11.2024.
 //
 
-#include "manager/device_manager.h"
+#include "manager/device.h"
 #include "device_list.h"
 #include "helper/hex.h"
 #include <algorithm>

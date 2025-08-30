@@ -6,11 +6,10 @@
 #include <thread>
 #include <WiFi.h>
 #include <esp_wifi_types.h>
-#include "comms/wifi_manager.h"
-
 #include <sstream>
 
 #include "logger/serial_logger.h"
+#include "manager/wifi.h"
 #include "wifi.h"
 #include "helper/network.h"
 
