@@ -46,4 +46,5 @@ std::string Network::ipToString(const IPAddress& ip)
 bool Network::ping(const IPAddress& ip)
 {
     //TODO: ICMP ping veya WiFiUDP tabanlı ping implementasyonu
+    return true;
 }
