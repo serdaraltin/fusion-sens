@@ -26,6 +26,7 @@ class Network {
 
     static bool ping(const IPAddress &ip);
 
+    static std::string wifiAuthModeToString(wifi_auth_mode_t mode);
 };
 
 

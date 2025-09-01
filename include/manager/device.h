@@ -6,11 +6,11 @@
 #define FUSION_SENS_DEVICE_MANAGER_H
 
 #include "device/device.h"
-#include "device_list.h"
+#include "devices.h"
 #include <vector>
 
 /**
- * @file device_manager.h
+ * @file device.h
  * @brief Singleton class to manage a list of devices.
  *
  * This class manages a collection of `Device` objects and provides an interface to:

@@ -40,6 +40,11 @@ void setup() {
     IWiFi.connect();
 
     delay(1000);
+
+    for (const WifiInfo& network: IWiFi.scanNetworks())
+    {
+        SerialLog.Info(network.to_string().c_str());
+    }
     test();
 }
 
@@ -50,58 +55,8 @@ std::string formatFloat(const float value, const int width = 6) {
 }
 
 void loop() {
-
-   /* WiFi.mode(WIFI_STA);
-    WiFi.disconnect();
     delay(100);
 
-    int n = WiFi.scanNetworks();
-
-    for (int i = 0; i < n; i++)
-    {
-        Serial.printf("%2d",i + 1);
-        Serial.print(" | ");
-        Serial.printf("%-32.32s", WiFi.SSID(i).c_str());
-        Serial.print(" | ");
-        Serial.printf("%4d", WiFi.RSSI(i));
-        Serial.print(" | ");
-        Serial.printf("%2d", WiFi.channel(i));
-        Serial.print(" | ");
-        switch (WiFi.encryptionType(i))
-        {
-        case WIFI_AUTH_OPEN:
-            Serial.print("open");
-            break;
-        case WIFI_AUTH_WEP:
-            Serial.print("WEP");
-            break;
-        case WIFI_AUTH_WPA_PSK:
-            Serial.print("WPA");
-            break;
-        case WIFI_AUTH_WPA2_PSK:
-            Serial.print("WPA2");
-            break;
-        case WIFI_AUTH_WPA_WPA2_PSK:
-            Serial.print("WPA+WPA2");
-            break;
-        case WIFI_AUTH_WPA2_ENTERPRISE:
-            Serial.print("WPA2-EAP");
-            break;
-        case WIFI_AUTH_WPA3_PSK:
-            Serial.print("WPA3");
-            break;
-        case WIFI_AUTH_WPA2_WPA3_PSK:
-            Serial.print("WPA2+WPA3");
-            break;
-        case WIFI_AUTH_WAPI_PSK:
-            Serial.print("WAPI");
-            break;
-        default:
-            Serial.print("unknown");
-        }
-        Serial.println();
-        delay(10);
-    }*/
 /*
     sensors_event_t acc, gyro, temp;
     IIMU.sensor.getEvent(&acc, &gyro, &temp);

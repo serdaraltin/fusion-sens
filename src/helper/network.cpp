@@ -48,3 +48,22 @@ bool Network::ping(const IPAddress& ip)
     //TODO: ICMP ping veya WiFiUDP tabanlı ping implementasyonu
     return true;
 }
+
+std::string Network::wifiAuthModeToString(wifi_auth_mode_t mode)
+{
+    switch (mode)
+    {
+    case WIFI_AUTH_OPEN:           return "Open";
+    case WIFI_AUTH_WEP:            return "WEP";
+    case WIFI_AUTH_WPA_PSK:        return "WPA_PSK";
+    case WIFI_AUTH_WPA2_PSK:       return "WPA2_PSK";
+    case WIFI_AUTH_WPA_WPA2_PSK:   return "WPA_WPA2_PSK";
+    case WIFI_AUTH_ENTERPRISE:     return "Enterprise (EAP)";
+    case WIFI_AUTH_WPA3_PSK:       return "WPA3_PSK";
+    case WIFI_AUTH_WPA2_WPA3_PSK:  return "WPA2_WPA3_PSK";
+    case WIFI_AUTH_WAPI_PSK:       return "WAPI_PSK";
+    case WIFI_AUTH_WPA3_ENT_192:   return "WPA3_ENT_SUITE_B_192";
+    case WIFI_AUTH_MAX:            return "Invalid/Max";
+    default:                       return "Unknown";
+    }
+}

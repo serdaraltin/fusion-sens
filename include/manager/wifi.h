@@ -7,10 +7,12 @@
 
 #include <esp_wifi_types.h>
 #include <string>
+#include <utility>
 #include <vector>
-#include <optional>
-#include <functional>
 #include <memory>
+#include <mutex>
+#include <sstream>
+#include <helper/network.h>
 
 /// Shortcut macro for accessing WiFiManager singleton instance
 #define IWiFi WiFiManager::getInstance()
@@ -25,9 +27,52 @@ struct WifiInfo
     std::string password;          ///< Password (only for stored credentials)
     std::string bssid;             ///< BSSID (MAC address of AP)
     std::string ip;                ///< Local IP when connected
-    int channel;                   ///< Channel number
-    int8_t rssi;                   ///< Signal strength in dBm
-    wifi_auth_mode_t encryption;   ///< Encryption type (WPA2, WPA3, etc.)
+    int channel = -1;                   ///< Channel number
+    int8_t rssi = 0;                   ///< Signal strength in dBm
+    wifi_auth_mode_t encryption = WIFI_AUTH_OPEN;   ///< Encryption type (WPA2, WPA3, etc.)
+
+  WifiInfo() = default;
+
+  WifiInfo(std::string  ssid,
+           std::string  password,
+           std::string  bssid,
+           std::string  ip,
+           const int channel,
+           const int8_t rssi,
+           const wifi_auth_mode_t encryption
+  ):ssid(std::move(ssid)),
+    password(std::move(password)),
+    bssid(std::move(bssid)),
+    ip(std::move(ip)),
+    channel(channel),
+    rssi(rssi),
+    encryption(encryption){}
+
+ WifiInfo(std::string  ssid,
+          const int channel,
+          const int8_t rssi,
+          const wifi_auth_mode_t encryption
+ ):ssid(std::move(ssid)),
+   channel(channel),
+   rssi(rssi),
+   encryption(encryption){}
+
+ WifiInfo(std::string  ssid,
+          std::string  password
+ ): ssid(std::move(ssid)),
+    password(std::move(password)), channel(0), rssi(0), encryption()
+    {
+    }
+
+ std::string to_string() const
+  {
+   std::ostringstream os;
+   os << "SSID: " << ssid << "\n"
+      << "RSSI: " << static_cast<int>(rssi) << " dBm\n"
+      << "Encryption: " << Network::wifiAuthModeToString(encryption) << "\n";
+   return os.str();
+  }
+
 };
 
 /**

@@ -34,6 +34,18 @@ std::vector<WifiInfo> WiFiManager::scanNetworks()
 {
     std::vector<WifiInfo> networks;
 
+    int n = WiFi.scanNetworks();
+
+    for (int i = 0; i < n; i++)
+    {
+        networks.emplace_back(
+                WiFi.SSID(i).c_str(),
+                WiFi.channel(i),
+                WiFi.RSSI(i),
+                WiFi.encryptionType(i)
+            );
+    }
+
     return networks;
 }
 
