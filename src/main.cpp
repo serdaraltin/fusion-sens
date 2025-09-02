@@ -29,8 +29,13 @@ void initialize()
     WiFiManager::getInstance();
 }
 
-void test(){
-
+void debug(){
+#ifdef NETWORK_DEBUG
+    for (const WifiInfo& network: IWiFi.scanNetworks())
+    {
+        SerialLog.Info(network.to_string().c_str());
+    }
+#endif
 }
 
 //#ifndef  UNIT_TEST
@@ -39,13 +44,8 @@ void setup() {
     initialize();
     IWiFi.connect();
 
-    delay(1000);
-
-    for (const WifiInfo& network: IWiFi.scanNetworks())
-    {
-        SerialLog.Info(network.to_string().c_str());
-    }
-    test();
+    delay(500);
+    debug();
 }
 
 std::string formatFloat(const float value, const int width = 6) {

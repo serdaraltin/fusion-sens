@@ -65,13 +65,14 @@ struct WifiInfo
     }
 
  std::string to_string() const
-  {
-   std::ostringstream os;
-   os << "SSID: " << ssid << "\n"
-      << "RSSI: " << static_cast<int>(rssi) << " dBm\n"
-      << "Encryption: " << Network::wifiAuthModeToString(encryption) << "\n";
-   return os.str();
-  }
+ {
+    std::ostringstream os;
+    os << "ssid=" << ssid
+       << ",rssi=" << static_cast<int>(rssi)
+       << ",channel=" << channel
+       << ",encryption=" << Network::wifiAuthModeToString(encryption);
+    return os.str();
+ }
 
 };
 

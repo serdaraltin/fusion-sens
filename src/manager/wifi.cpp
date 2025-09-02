@@ -15,6 +15,8 @@
 
 std::unique_ptr<WiFiManager> WiFiManager::instance = nullptr;
 
+
+
 WiFiManager::~WiFiManager() = default;
 
 WiFiManager::WiFiManager(): currentWiFi()
@@ -116,7 +118,6 @@ void WiFiManager::updateWiFiInfo()
 
     SerialLog.Info("Wifi updated.");
 }
-
 
 bool WiFiManager::getStatus()
 {
